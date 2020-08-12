@@ -12,7 +12,7 @@
 <% end %>
 
 <%= @recipe.title %>
-<%= form_with scope: :recipe, local: true do |form| %>
+<%= form_with model: @recipe, local: true do |form| %>
   <p>
     <%= form.label :title %><br>
     <%= form.text_field :title %><br>

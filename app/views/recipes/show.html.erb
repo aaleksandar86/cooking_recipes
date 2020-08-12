@@ -1,0 +1,4 @@
+<h1>Show</h1>
+<%= link_to 'All Recipes', root_path %> |
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Delete', recipe_path(@recipe), method: :delete, data: { confirm: "Are you sure you want to delete this recipe?" } %>

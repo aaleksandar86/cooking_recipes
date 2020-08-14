@@ -1,0 +1,23 @@
+ <nav class="navbar is-info">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-3" id="home-title">Twitter Clone</h1>
+        <% end %>
+      </div>
+
+    <div id="navbarExample" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <% if logged_in? %>
+              <%= link_to "New Recipe", new_recipe_path, class: "button is-info has-text-weight-bold" %>
+              <%= link_to "Log Out", logout_path, method: :delete, class: "button is-info has-text-weight-bold" %>
+            <% else %>
+              <%= link_to "Log In", login_path, class: "button is-info has-text-weight-bold" %>
+              <%= link_to "Sign Up", users_signup_path, class: "button is-info has-text-weight-bold" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+</nav>

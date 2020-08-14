@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content is-size-3">
+        <h1><%= heading %></h1>
+      </div>
+    </div>
+
+    <% if recipe.errors.any? %>
+      <div class="column is-6 is-offset-3">
+        <article class="message is-danger">
+          <div class="message-body">
+            <p>
+              <%= pluralize(recipe.errors.count, "error") %>
+              prohibited this recipe from being saved:</p>
+            <br>
+            <p>
+              <% recipe.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </p>
+          </div>
+        </article>
+      </div>
+    <% end %>
+
+    <div class="column is-6 is-offset-3">
+      <%= form_with model: recipe, local: true do |form| %>
+        <div class="field">
+          <%= form.label :title, class: "label" %>
+          <div class="control">
+            <%= form.text_field :title, class: "input", placeholder: "Title" %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.label :description, class: "label" %>
+          <div class="control">
+            <%= form.text_area :description, class: "textarea", placeholder: 'Recipe description' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.fields_for :instructions do |instructions_form| %>
+            <%= instructions_form.label 'Instruction', class: "label" %>
+            <div class="control">
+              <%= instructions_form.text_area :body, class: "textarea", placeholder: 'Recipe instruction' %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= form.fields_for :ingredients do |ingredients_form| %>
+            <%= ingredients_form.label 'Ingredient', class: "label" %>
+            <div class="control">
+              <%= ingredients_form.text_field :body, class: "input", placeholder: 'Recipe ingredient' %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <%= form.submit submit, class: "button is-link" %>
+          </div>
+
+          <div class="control">
+            <%= link_to "Cancel", cancel_path, class: 'button is-link is-light' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

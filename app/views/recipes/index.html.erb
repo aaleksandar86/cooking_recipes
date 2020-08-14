@@ -9,3 +9,11 @@
     <% end %>
   </ul>
 
+
+<div class="container">
+  <div class="columns is-multiline">
+     <% @recipes.each do |recipe| %>
+        <%= render recipe %>
+     <% end %>
+  </div>
+</div>

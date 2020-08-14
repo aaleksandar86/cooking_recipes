@@ -1,27 +1,5 @@
-<h1> Edit recipe </h1>
-
-<% if @recipe.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
-    <ul>
-      <% @recipe.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<%= @recipe.title %>
-<%= form_with model: @recipe, local: true do |form| %>
-   <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %><br>
-  </p>
-
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %><br>
-  </p>
-  <%= form.submit 'Update Recipe' %> |
-  <%= link_to 'Back', root_path%>
-<% end %>
+<%= render 'form',
+recipe: @recipe,
+submit: 'Update Recipe',
+cancel_path: recipe_path(@recipe),
+heading: 'Edit Recipe' %>

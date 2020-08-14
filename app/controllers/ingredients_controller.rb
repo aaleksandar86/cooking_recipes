@@ -1,5 +1,6 @@
 class IngredientsController < ApplicationController
   def new
+    session_notice(:danger, 'You have to be logged in!', login_path) unless logged_in?
     @recipe = Recipe.find(params[:recipe_id])
     @ingredient = @recipe.ingredients.build
   end
@@ -7,6 +8,7 @@ class IngredientsController < ApplicationController
   def create
     @recipe = Recipe.find(params[:recipe_id])
     @ingredient = @recipe.ingredients.build(ingredient_params)
+    @ingredient.user = current_user
 
     if @ingredient.save
       redirect_to @recipe
@@ -16,7 +18,11 @@ class IngredientsController < ApplicationController
   end
 
   def edit
+    session_notice(:danger, 'You have to be logged in!', login_path) unless logged_in?
     @ingredient = Ingredient.find(params[:id])
+    if logged_in?
+      session_notice(:danger, 'Wrong User') unless equal_with_current_user?(@ingredient.user)
+    end
     @recipe = @ingredient.recipe
   end
 
@@ -32,9 +38,14 @@ class IngredientsController < ApplicationController
   end
 
   def destroy
+    session_notice(:danger, 'You must be logged in!', login_path) unless logged_in?
     ingredient = Ingredient.find(params[:id])
-    ingredient.destroy
-    redirect_to ingredient.recipe
+    if equal_with_current_user?(ingredient.user)
+      ingredient.destroy
+      redirect_to ingredient.recipe
+    else
+      session_notice(:danger, 'Wrong User')
+    end
   end
 
   private

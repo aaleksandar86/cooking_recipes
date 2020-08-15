@@ -1,4 +1,37 @@
-<h1>Show</h1>
-<%= link_to 'All Recipes', root_path %> |
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Delete', recipe_path(@recipe), method: :delete, data: { confirm: "Are you sure you want to delete this recipe?" } %>
+ <div class="section">
+  <div class="container is-size-4">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <h1 class="is-size-2">Recipe title: <%= @recipe.title %></h1>
+        <h2>Created by: <%= @recipe.user.username.downcase %><h2>
+        <h2> <%= @recipe.user.first_name %>
+        <%= @recipe.user.last_name %><h2>
+        <p>Recipe description: <%= @recipe.description %></p>
+        </div>
+          <div class="column is-6">
+            <h2>Ingredients:</h2>
+              <ul>
+                <%= @recipe.ingredients.each do |ingredient| %>
+                <li><%= ingredient.ingredient_name %>
+                <% end %>
+              </ul>
+          </div>
+          <div class="column is-6">
+            <h2>Instructions:</h2>
+              <ol>
+                <%= @recipe.instructions.each do |instruction| %>
+                <li><%= instruction.body %>
+                <% end %>
+              </ol>
+          </div>
+
+      <div class="column is-12">
+        <%= link_to 'Back', root_path, class: "button is-outlined is-rounded" %>
+        <%= link_to 'Edit', edit_recipe_path(@recipe), class: "button is-info is-outlined is-rounded" %>
+        <%= link_to 'Delete', recipe_path(@recipe), method: :delete,
+            data: { confirm: "Are you sure you want to delete this recipe?" },
+            class: "button is-danger is-outlined is-rounded" %>
+      </div>
+    </div>
+  </div>
+ </div>

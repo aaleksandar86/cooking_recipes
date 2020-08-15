@@ -7,7 +7,6 @@
         </div>
     </section>
 
-
     <div class="container">
         <section class="articles">
             <div class="column is-8 is-offset-2">
@@ -18,8 +17,8 @@
                             <div class="media-content has-text-centered">
                                 <p class="title article-title"><%= recipe.title %></p>
                                 <div class="tags has-addons level-item">
-                                    <span class="tag is-rounded is-info">@skeetskeet</span>
-                                    <span class="tag is-rounded">May 10, 2018</span>
+                                    <span class="tag is-rounded is-info"><%= recipe.user.username.downcase %></span>
+                                    <span class="tag is-rounded"><%= time_ago_in_words(recipe.created_at) %> ago</span>
                                 </div>
                             </div>
                         </div>
@@ -30,14 +29,6 @@
                         </div>
                     </div>
                 </div>
-                <% end %>
+            <% end %>
         </div>
-        <script async type="text/javascript" src="../js/bulma.js"></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        //The first argument are the elements to which the plugin shall be initialized
-        //The second argument has to be at least a empty object or a object with your desired options
-        OverlayScrollbars(document.querySelectorAll("body"), { });
-        });
-        </script>
+

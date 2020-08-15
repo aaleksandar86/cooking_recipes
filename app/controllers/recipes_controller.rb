@@ -1,17 +1,18 @@
 class RecipesController < ApplicationController
-  before_action :recipe_find, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_login, only: [:index, :show]
+  before_action :find_recipe, except: [:index, :new, :create]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def index
     @recipes = Recipe.all.order('created_at DESC')
   end
 
   def show
-
   end
 
   def new
-    session_notice(:danger, 'You have to be logged in') unless logged_in?
     @recipe = Recipe.new
-    5.times { @recipe.ingredients.build }
+    4.times { @recipe.ingredients.build }
     3.times { @recipe.instructions.build }
   end
 
@@ -20,27 +21,22 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     if @recipe.save
-      redirect_to @recipe, notice: 'You have successfully created a new recipe'
+      flash[:success] = 'You have successfully created a new recipe'
+      redirect_to recipe_path(@recipe)
     else
       render :new
     end
   end
 
   def edit
-    session_notice(:danger, 'You have to be logged in') unless logged_in?
-    @recipe = Recipe.find(params[:id])
-    if logged_in?
-      session_notice(:danger, 'Wrong User') unless equal_with_current_user?(@recipe.user)
-    end
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
-
     if @recipe.update(recipe_params)
-      redirect_to @recipe
+      flash[:success] = 'Successfuly Updated'
+      redirect_to recipe_path(@recipe)
     else
-      render 'edit'
+      render :edit
     end
   end
 
@@ -57,12 +53,19 @@ class RecipesController < ApplicationController
 
   private
 
-  def recipe_find
+  def find_recipe
     @recipe = Recipe.find(params[:id])
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description,ingredients_attributes: [:id, :ingredient_name, :_destroy],
+    params.require(:recipe).permit(:title, :description, ingredients_attributes: [:id, :ingredient_name, :_destroy],
                                   instructions_attributes: [:id, :body, :_destroy])
+  end
+
+  def correct_user
+    unless equal_with_current_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path)
+    end
   end
 end

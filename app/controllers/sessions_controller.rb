@@ -1,18 +1,21 @@
 class SessionsController < ApplicationController
-  # skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :require_login, only: [:new, :create]
+
   def new
-    session_notice('warning', 'Already logged in!') if logged_in?
   end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
+
     if user&.authenticate(params[:session][:password])
       log_in(user)
+      flash[:success] = "Welcome #{user.username} !"
       redirect_to user
     else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
+      flash.now[:danger] = 'Email and password miss match'
+      render :new
     end
+
   end
 
   def destroy

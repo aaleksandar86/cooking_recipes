@@ -65,3 +65,8 @@ div.column.is-8:first-child {
 .promo-block .container {
   margin: 1rem 5rem;
 }
+.hero-body .title {
+  text-shadow: 2px 2px black;
+}
+
+

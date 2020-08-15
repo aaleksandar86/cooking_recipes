@@ -1,19 +1,43 @@
-<h1>hi from index<h1>
-<%= link_to 'New Recipe', new_recipe_path %>
-  <ul>
-    <% @recipes.each do |recipe| %>
-      <li>
-        <%= link_to recipe.title, recipe_path(recipe) %>
-        <%= recipe.description %>
-      </li>
-    <% end %>
-  </ul>
+
+    <section class="hero is-info is-medium is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">WELCOME TO OUR COOKING RECIPES WEBSITE <br>WE HOPE YOU ENJOY YOUR STAY</h1>
+            </div>
+        </div>
+    </section>
 
 
-<div class="container">
-  <div class="columns is-multiline">
-     <% @recipes.each do |recipe| %>
-        <%= render recipe %>
-     <% end %>
-  </div>
-</div>
+    <div class="container">
+        <section class="articles">
+            <div class="column is-8 is-offset-2">
+            <% @recipes.each do |recipe| %>
+                <div class="card article">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content has-text-centered">
+                                <p class="title article-title"><%= recipe.title %></p>
+                                <div class="tags has-addons level-item">
+                                    <span class="tag is-rounded is-info">@skeetskeet</span>
+                                    <span class="tag is-rounded">May 10, 2018</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content article-body">
+                            <p>Short description: </p>
+                            <p><%= recipe.description %></p>
+                            <h3 class="has-text-centered"> <%= link_to 'View Recipe', recipe_path(recipe) %></h3>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+        </div>
+        <script async type="text/javascript" src="../js/bulma.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        //The first argument are the elements to which the plugin shall be initialized
+        //The second argument has to be at least a empty object or a object with your desired options
+        OverlayScrollbars(document.querySelectorAll("body"), { });
+        });
+        </script>

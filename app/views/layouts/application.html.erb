@@ -4,16 +4,19 @@
     <title>Cooking Recipes</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css" %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Open+Sans" %>
   </head>
 
   <body>
-    <%= render 'shared/flash' %>
     <%= render 'shared/nav_bar' %>
+    <%= render 'shared/flash' %>
     <%= yield %>
   </body>
 </html>

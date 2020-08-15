@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :instruction do
-    body { "MyText" }
-    recipe { nil }
+    user
+    recipe
+
+    body { 'New instruction' }
   end
 end

@@ -22,10 +22,12 @@
               <ul>
                 <%= @recipe.ingredients.each do |ingredient| %>
                   <li><%= ingredient.ingredient_name %>
+                  <%= link_to 'Edit ingredient', edit_recipe_ingredient_path(ingredient.recipe.id, ingredient), class: "button is-small" %>
                   <%= link_to 'Delete ingredient', recipe_ingredient_path(@recipe, ingredient), method: :delete,
                       data: { confirm: "Are you sure you want to delete this ingredient?" },
                       class: "button is-small" %>
                 <% end %>
+                </li>
               </ul>
           </div>
           <div class="column is-6">
@@ -33,9 +35,11 @@
               <ol>
                 <%= @recipe.instructions.each do |instruction| %>
                   <li><%= instruction.body %>
+                  <%= link_to 'Edit instruction', edit_recipe_instruction_path(instruction.recipe.id, instruction), class: "button is-small" %>
                   <%= link_to 'Delete instruction', recipe_instruction_path(@recipe, instruction), method: :delete,
                       data: { confirm: "Are you sure you want to delete this instruction?" },
                       class: "button is-small" %>
+                  </li>
                 <% end %>
               </ol>
           </div>

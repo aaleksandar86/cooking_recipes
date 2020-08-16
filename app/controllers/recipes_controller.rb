@@ -41,14 +41,8 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    session_notice(:danger, 'You have to be logged in') unless logged_in?
-    recipe = Recipe.find(params[:id])
-    if equal_with_current_user?(recipe.user)
-      recipe.destroy
-      redirect_to recipes_path, notice: 'You have successfully deleted the recipe'
-    else
-      session_notice(:danger, 'Wrong User')
-    end
+    @recipe.destroy
+    redirect_to recipes_path, notice: 'You have successfully deleted the recipe'
   end
 
   private
@@ -58,8 +52,9 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description, ingredients_attributes: [:id, :ingredient_name, :_destroy],
-                                  instructions_attributes: [:id, :body, :_destroy])
+    params.require(:recipe).permit(:title, :description,
+                                   ingredients_attributes: [:id, :ingredient_name, :_destroy],
+                                   instructions_attributes: [:id, :body, :_destroy])
   end
 
   def correct_user

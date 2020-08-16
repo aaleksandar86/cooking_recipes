@@ -50,3 +50,9 @@ $ rails server
 ```
 
 Now visit [http://localhost:3000](http://localhost:3000)
+
+#### To run the tests
+
+```sh
+$ rspec
+```

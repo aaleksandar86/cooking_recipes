@@ -1,33 +1,55 @@
-<div class="column is-6 is-offset-3">
-  <div class="card">
-    <header class="card-header">
-      <p class="card-header-title">
-        <%= recipe.title %>
-      </p>
-    </header>
-    <div class="card-content">
-      <div class="content">
-        <p><%= recipe.description %></p>
+<div class="section">
+  <div class="container is-size-4">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">
+                  Recipe title: <%= @recipe.title %>
+                </p>
+            </header>
+          <div class="card-content">
+            <p>Recipe description: <%= @recipe.description %>
+              <h2>Created by: <%= @recipe.user.username.downcase %><h2>
+              <h2> <%= @recipe.user.first_name %>
+              <%= @recipe.user.last_name %><h2>
+            </p>
+          </div>
+       </div>
       </div>
-    </div>
-
-    <footer class="card-footer">
-      <% if local_assigns[:show] %>
-        <%= link_to "Back", root_path, class: "card-footer-item" %>
-      <% else %>
-        <%= link_to "Show", recipe_path(recipe), class: "card-footer-item" %>
-      <% end %>
-
-      <%= link_to "Edit", edit_recipe_path(recipe), class: "card-footer-item" %>
-
-      <% if local_assigns[:show] %>
-        <%= link_to "New Instruction", new_recipe_instruction_path(recipe), class: "card-footer-item" %>
-        <%= link_to "New Ingredient", new_recipe_ingredient_path(recipe), class: "card-footer-item" %>
-      <% end %>
-
-      <%= link_to "Delete", recipe_path(recipe), method: :delete,
-        data: { confirm: "Are you sure you want to delete this recipe?" },
-        class: "card-footer-item" %>
-    </footer>
+          <div class="column is-6">
+            <h2>Ingredients:</h2>
+              <ul>
+                <%= @recipe.ingredients.each do |ingredient| %>
+                  <li><%= ingredient.ingredient_name %>
+                <% end %>
+              </ul>
+          </div>
+          <div class="column is-6">
+            <h2>Instructions:</h2>
+              <ol>
+                <%= @recipe.instructions.each do |instruction| %>
+                  <li><%= instruction.body %>
+                <% end %>
+              </ol>
+          </div>
+          <footer class="card-footer">
+            <div class="column is-12">
+              <%= link_to 'Back', root_path, class: "button is-outlined is-rounded" %>
+              <%= link_to 'Edit', edit_recipe_path(@recipe),data: { turbolinks: false }, class: "button is-info is-outlined is-rounded" %>
+              <%= link_to 'Delete', recipe_path(@recipe), method: :delete,
+                  data: { confirm: "Are you sure you want to delete this recipe?" },
+                  class: "button is-danger is-outlined is-rounded" %>
+            </div>
+          </footer>
+        </div>
+      </div>
   </div>
-</div>
+
+
+
+
+
+
+
+ </div>

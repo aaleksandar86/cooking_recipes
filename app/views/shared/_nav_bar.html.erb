@@ -13,32 +13,12 @@
                 <div class="navbar-end">
                 <%= link_to 'Home', root_path, class: "navbar-item" %>
                   <% if logged_in? %>
-                    <%= link_to 'New Recipe', new_recipe_path, class: "navbar-item" %>
+                    <%= link_to 'New Recipe', new_recipe_path, data: { turbolinks: false }, class: "navbar-item" %>
                     <%= link_to 'Log Out', logout_path, method: :delete, class: "navbar-item" %>
                   <% else %>
-                    <%= link_to 'Login', login_path, class: "navbar-item" %>
+                    <%= link_to 'Sign In', login_path, class: "navbar-item" %>
                     <%= link_to 'Sign Up', users_signup_path, class: "navbar-item" %>
                   <% end %>
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                                Account
-                            </a>
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                    Dashboard
-                                </a>
-                            <a class="navbar-item">
-                                    Profile
-                                </a>
-                            <a class="navbar-item">
-                                    Settings
-                                </a>
-                            <hr class="navbar-divider">
-                            <div class="navbar-item">
-                                Logout
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

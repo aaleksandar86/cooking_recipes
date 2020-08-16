@@ -25,10 +25,19 @@
                         <div class="content article-body">
                             <p>Short description: </p>
                             <p><%= recipe.description %></p>
-                            <h3 class="has-text-centered"> <%= link_to 'View Recipe', recipe_path(recipe) %></h3>
+                            <h3 class="has-text-centered"> <%= link_to 'View Recipe', recipe_path(recipe), data: { turbolinks: false } %></h3>
                         </div>
                     </div>
                 </div>
             <% end %>
         </div>
 
+<footer class="footer">
+  <div class="has-text-centered">
+    <p>
+      <strong>Cooking recipes exercise</strong> by Aleksandar. The source code is licensed as
+      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+       is for the purpose of code training provided by <a href="https://codeacademy.mk/">Code Academy MK</a>.
+    </p>
+  </div>
+</footer>

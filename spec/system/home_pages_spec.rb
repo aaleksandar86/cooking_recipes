@@ -8,25 +8,25 @@ RSpec.describe 'HomePages' do
     visit root_path
   end
 
-  it 'shows the home link' do
-    expecting = page.has_link?('Home')
-
-    expect(expecting).to be true
-  end
-
-  it 'shows index title' do
-    visit root_path
-    text = page.has_text?('WELCOME TO OUR COOKING RECIPES WEBSITE')
-    expect(text).to be true
-  end
-
-  it 'shows page footer' do
-    visit root_path
-    text = page.has_text?('Cooking recipes exercise')
-    expect(text).to be true
-  end
-
   context 'when no user is sign in' do
+    it 'shows the home link' do
+      expecting = page.has_link?('Home')
+
+      expect(expecting).to be true
+    end
+
+    it 'shows index title' do
+      visit root_path
+      text = page.has_text?('WELCOME TO OUR COOKING RECIPES WEBSITE')
+      expect(text).to be true
+    end
+
+    it 'shows page footer' do
+      visit root_path
+      text = page.has_text?('Cooking recipes exercise')
+      expect(text).to be true
+    end
+
     it 'shows the Sign In link' do
       expecting = page.has_link?('Sign In')
 
